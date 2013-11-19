@@ -2,3 +2,14 @@ language: ruby
 rvm:
 - 1.9.3
 - 2.0.0
+deploy:
+  provider: heroku
+  api_key:
+    secure: WGd5UY94D/o8CJVeQO489HIabd8XSUkZhz+tCcKV/hDqdD1WVRIDYK2HPQtlHpXqp7hzBsYl/4bowxXh91eJeZVECYW5PDKWhIvMYhUa+yqxK97FVG6sjDm85BNjLivzBjh/KIDtfz9iWv22cSJWBcmouXk97nOK0XNuHQRSWeA=
+  app:
+    master: sm-medokoro-server
+    staging: sm-medokoro-server-staging
+  on:
+    repo: kimihito/sm-medokoro-server
+  run:
+    -rake db:migrate
