@@ -10,5 +10,3 @@ deploy:
     staging: sm-medokoro-server-staging
   on:
     repo: kimihito/sm-medokoro-server
-  run:
-    - rake db:migrate
