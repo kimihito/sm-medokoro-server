@@ -1,3 +1,5 @@
+require 'factory_girl_rails'
+
 def set_secret_token
   powenv = File.open(".powenv","rb").read
   secret_token = powenv.gsub("export SECRET_TOKEN=\"", "").gsub(/\"\n$/,"")
