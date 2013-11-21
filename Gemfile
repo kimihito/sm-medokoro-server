@@ -10,6 +10,15 @@ group :development do
   gem 'sqlite3'
 end
 
+group :test do
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'guard-pow', require: false
+  gem 'factory_girl_rails'
+  gem 'spring'
+  gem "spring-commands-rspec"
+end
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
