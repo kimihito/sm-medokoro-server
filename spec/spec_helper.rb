@@ -7,7 +7,7 @@ end
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 if ENV["RAILS_ENV"] == 'test' && FileTest.exist?(".powenv")
-  NouseTravis::Application.config.secret_key_base = set_secret_token
+  SmMedokoroServer::Application.config.secret_key_base = set_secret_token
 end
 
 require File.expand_path("../../config/environment", __FILE__)
