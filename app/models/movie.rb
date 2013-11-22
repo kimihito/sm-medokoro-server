@@ -12,14 +12,16 @@ class Movie < ActiveRecord::Base
     data = Hash.new
     uri = URI("https://gdata.youtube.com/feeds/api/standardfeeds/JP/most_recent?time=today&v=2").read
     docs = Nokogiri::XML(uri)
-    entry = docs.search("entry").text
+    entry = docs.search("entry")
     entry.each_with_index do |attr,index|
       media = attr.xpath("media:group")
-      data[index] = {yt: {title: attr.search("title").text}}
-      data[index] = {yt: {thumbnail: media.xpath("media:thumbnail").attr("url")}}
-      data[index] = {yt: {thumbnail: media.xpath("yt:videoid").text}}
-      data[index] = {yt: {category: media.xpath("media:category").text}}
+      data[index] = {yt: {title: attr.search("title").text,
+                          thumbnail:media.xpath("media:thumbnail").attr("url").value,
+                          videoid: media.xpath("yt:videoid").text,
+                          category: media.xpath("media:category").text,
+                          provider: "youtube"
+                         }
+                    }
     end
   end
-
 end
