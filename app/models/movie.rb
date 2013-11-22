@@ -55,5 +55,39 @@ class Movie < ActiveRecord::Base
     end
   end
 
+  def get_vimeo_data
+    vm_data = Hash.new
+    uri = URI("http://vimeo.com/channels/staffpicks/videos/rss").read
+    docs = Nokogiri::XML(uri)
+    items = docs.search("item")
+    items.each_with_index do |attr, index|
+      url = attr.search("link").text
+      title = attr.search("title").text
+      thumbnail_url = attr.xpath("media:content").xpath("media:thumbnail").attr("url").text
+      videoid = url.split("/").last
+      tags = []
+      attr.search("description").each do |el|
+        html = Nokogiri::HTML.parse(el.children.text)
+        html.search("body").search("p").children.each do |e|
+          if e.attr("href").class != NilClass && e.attr("href").include?("tag:")
+            tag = e.attr("href").split("/").last
+            tags << tag.split(":").last
+          end
+        end
+      end
+      vm_data[index] = {vm:
+                        {
+                          title: title,
+                          url:   url,
+                          thumbnail: thumbnail_url,
+                          videoid: videoid,
+                          category: tags,
+                          provider: "niconico"
+                        }
+                       }
+    end
+
+  end
+
 
 end
