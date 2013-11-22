@@ -86,8 +86,28 @@ class Movie < ActiveRecord::Base
                         }
                        }
     end
-
   end
 
-
+  def get_fc2_data
+    fc_data = Hash.new
+    uri = URI("http://video.fc2.com/feed_popular.php?m=recent").read
+    docs = Nokogiri::XML(uri)
+    items = docs.search("item")
+    items.each_with_index do |attr, index|
+      url = attr.search("link").text
+      videoid = url.split("=").last
+      thumbnail_url = attr.xpath("dc:image").text
+      title = attr.search("title").text
+      fc_data[index] = {fc:
+                        {
+                          title: title,
+                          url: url,
+                          videoid: videoid,
+                          thumbnail: thumbnail_url,
+                          category: "",
+                          provider: "fc2"
+                        }
+                       }
+    end
+  end
 end
