@@ -8,11 +8,11 @@ class Movie < ActiveRecord::Base
   validates :url,  format: { with: /\A(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/(\w*?)\Z/}
   has_many :categories
 
+ 
+
   def get_youtube_data
     yt_data = Hash.new
-    uri = URI("https://gdata.youtube.com/feeds/api/standardfeeds/JP/most_recent?time=today&v=2").read
-    docs = Nokogiri::XML(uri)
-    entry = docs.search("entry")
+    entry = parse_url_to_xml("youtube").search("entry")
     entry.each_with_index do |attr,index|
       media = attr.xpath("media:group")
       yt_data[index] = {yt:
@@ -30,9 +30,7 @@ class Movie < ActiveRecord::Base
 
   def get_niconico_data
     nc_data = Hash.new
-    uri = URI("http://www.nicovideo.jp/ranking/view/daily?rss=2.0").read
-    docs = Nokogiri::XML(uri)
-    items = docs.search("item")[0..24]
+    items = parse_url_to_xml("niconico").search("item")[0..24]
     items.each_with_index do |attr,index|
       url = attr.search("link").text
       videoid = url.split("/").last
@@ -57,9 +55,7 @@ class Movie < ActiveRecord::Base
 
   def get_vimeo_data
     vm_data = Hash.new
-    uri = URI("http://vimeo.com/channels/staffpicks/videos/rss").read
-    docs = Nokogiri::XML(uri)
-    items = docs.search("item")
+    items = parse_url_to_xml("vimeo").search("item")
     items.each_with_index do |attr, index|
       url = attr.search("link").text
       title = attr.search("title").text
@@ -90,9 +86,7 @@ class Movie < ActiveRecord::Base
 
   def get_fc2_data
     fc_data = Hash.new
-    uri = URI("http://video.fc2.com/feed_popular.php?m=recent").read
-    docs = Nokogiri::XML(uri)
-    items = docs.search("item")
+    items = parse_url_to_xml("fc2").search("item")
     items.each_with_index do |attr, index|
       url = attr.search("link").text
       videoid = url.split("=").last
@@ -109,5 +103,22 @@ class Movie < ActiveRecord::Base
                         }
                        }
     end
+  end
+
+  private
+
+  def parse_url_to_xml(provider)
+    uri = URI(provider_to_url(provider)).read
+    docs = Nokogiri::XML(uri)
+  end
+
+  def provider_to_url(provider)
+    provider.to_s unless provider.class == "String"
+    {
+      youtube:  "https://gdata.youtube.com/feeds/api/standardfeeds/JP/most_recent?time=today&v=2",
+      niconico: "http://www.nicovideo.jp/ranking/view/daily?rss=2.0",
+      vimeo:    "http://vimeo.com/channels/staffpicks/videos/rss",
+      fc2:      "http://video.fc2.com/feed_popular.php?m=recent"
+    }[provider.to_sym]
   end
 end
