@@ -10,9 +10,9 @@ class Movie < ActiveRecord::Base
 
  
 
-  def get_youtube_data
+  def self.get_youtube_data
     yt_data = Hash.new
-    entry = parse_url_to_xml("youtube").search("entry")
+    entry = self.parse_url_to_xml("youtube").search("entry")
     entry.each_with_index do |attr,index|
       media = attr.xpath("media:group")
       yt_data[index] = {yt:
@@ -26,11 +26,12 @@ class Movie < ActiveRecord::Base
                       }
                     }
     end
+    yt_data
   end
 
-  def get_niconico_data
+  def self.get_niconico_data
     nc_data = Hash.new
-    items = parse_url_to_xml("niconico").search("item")[0..24]
+    items = self.parse_url_to_xml("niconico").search("item")[0..24]
     items.each_with_index do |attr,index|
       url = attr.search("link").text
       videoid = url.split("/").last
@@ -51,11 +52,12 @@ class Movie < ActiveRecord::Base
                       }
                     }
     end
+    nc_data
   end
 
-  def get_vimeo_data
+  def self.get_vimeo_data
     vm_data = Hash.new
-    items = parse_url_to_xml("vimeo").search("item")
+    items = self.parse_url_to_xml("vimeo").search("item")
     items.each_with_index do |attr, index|
       url = attr.search("link").text
       title = attr.search("title").text
@@ -78,15 +80,16 @@ class Movie < ActiveRecord::Base
                           thumbnail: thumbnail_url,
                           videoid: videoid,
                           category: tags,
-                          provider: "niconico"
+                          provider: "vimeo"
                         }
                        }
     end
+    vm_data
   end
 
-  def get_fc2_data
+  def self.get_fc2_data
     fc_data = Hash.new
-    items = parse_url_to_xml("fc2").search("item")
+    items = self.parse_url_to_xml("fc2").search("item")
     items.each_with_index do |attr, index|
       url = attr.search("link").text
       videoid = url.split("=").last
@@ -103,16 +106,16 @@ class Movie < ActiveRecord::Base
                         }
                        }
     end
+    fc_data
   end
 
-  private
 
-  def parse_url_to_xml(provider)
-    uri = URI(provider_to_url(provider)).read
+  def self.parse_url_to_xml(provider)
+    uri = URI(self.provider_to_url(provider)).read
     docs = Nokogiri::XML(uri)
   end
 
-  def provider_to_url(provider)
+  def self.provider_to_url(provider)
     provider.to_s unless provider.class == "String"
     {
       youtube:  "https://gdata.youtube.com/feeds/api/standardfeeds/JP/most_recent?time=today&v=2",
