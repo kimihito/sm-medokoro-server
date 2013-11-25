@@ -6,7 +6,7 @@
 			<script type="text/javascript" src="http://ext.nicovideo.jp/thumb_watch/<%=m.videoid%>?w=250&h=128"></script>
 		<% elsif m.provider == "vimeo" %>
 			<iframe src="//player.vimeo.com/video/<%=m.videoid%>" width="250" height="128" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-	 	<% elsif m.provider == "fc2" %>
+		<% elsif m.provider == "fc2" %>
 		 <script src="http://static.fc2.com/video/js/outerplayer.min.js" url="http://video.fc2.com/ja/content/<%=m.videoid%>/" tk="" tl="<%=m.title%>" sj="34000" d="" w="250" h="128" charset="UTF-8"></script>	
 		<% end %>
 	<% end %>
