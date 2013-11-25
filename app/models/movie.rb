@@ -3,7 +3,7 @@ require 'open-uri'
 require 'rexml/document'
 
 class Movie < ActiveRecord::Base
-  attr_accessor :title, :url, :provider
+  attr_accessor :title, :url, :provider, :videoid, :thumbnail
   validates :title,:provider, :url, presence: true
   has_many :categories
 
