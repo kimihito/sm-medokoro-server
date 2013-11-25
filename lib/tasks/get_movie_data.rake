@@ -17,7 +17,7 @@ namespace :get_movie_data do
       provider  = "youtube"
       Movie.create(title: title, url: url, thumbnail: thumbnail, videoid: videoid, provider: provider)
     end
+    puts "save yotube daily recent popular movies"
   end
-
 
 end
