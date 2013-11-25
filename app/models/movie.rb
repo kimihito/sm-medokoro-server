@@ -1,32 +1,6 @@
-require 'nokogiri'
-require 'open-uri'
-require 'rexml/document'
-
 class Movie < ActiveRecord::Base
   attr_accessor :title, :url, :provider, :videoid, :thumbnail
-  validates :title,:provider, :url, presence: true
   has_many :categories
-
- 
-
-  def self.get_youtube_data
-    yt_data = Hash.new
-    entry = self.parse_url_to_xml("youtube").search("entry")
-    entry.each_with_index do |attr,index|
-      media = attr.xpath("media:group")
-      yt_data[index] = {yt:
-                      {
-                        title: attr.search("title").text,
-                        url: media.xpath("media:player").attr("url").text.gsub(/&feature=youtube_gdata_player$/,""),
-                        thumbnail: media.xpath("media:thumbnail").attr("url").value,
-                        videoid: media.xpath("yt:videoid").text,
-                        category: media.xpath("media:category").text,
-                        provider: "youtube"
-                      }
-                    }
-    end
-    yt_data
-  end
 
   def self.get_niconico_data
     nc_data = Hash.new
@@ -40,18 +14,20 @@ class Movie < ActiveRecord::Base
       category = nc_docs.search("tags").search("tag").children.first.text
       title = nc_docs.search("title").text
 
-      nc_data[index] = {nc:
-                      {
-                        title: title,
-                        url:   url,
-                        thumbnail: thumbnail_url,
-                        videoid: videoid,
-                        category: category,
-                        provider: "niconico"
-                      }
-                    }
+      self.create(title: title, url: url, thumbnail: thumbnail_url, videoid: videoid, provider: "niconico")
+
+      # nc_data[index] = {nc:
+      #                 {
+      #                   title: title,
+      #                   url:   url,
+      #                   thumbnail: thumbnail_url,
+      #                   videoid: videoid,
+      #                   category: category,
+      #                   provider: "niconico"
+      #                 }
+      #               }
     end
-    nc_data
+    # nc_data
   end
 
   def self.get_vimeo_data
