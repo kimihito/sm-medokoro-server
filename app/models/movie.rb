@@ -1,6 +1,6 @@
 class Movie < ActiveRecord::Base
-  attr_accessor :title, :url, :provider, :videoid, :thumbnail
   has_many :categories
+  validates :title, :provider, :url, presence:true
 
   def self.get_niconico_data
     nc_data = Hash.new
