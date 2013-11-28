@@ -7,7 +7,7 @@ def set_secret_token
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
+ENV["SECRET_TOKEN"] ||= 'test'
 if ENV["RAILS_ENV"] == 'test' && FileTest.exist?(".powenv")
   SmMedokoroServer::Application.config.secret_key_base = set_secret_token
 end
