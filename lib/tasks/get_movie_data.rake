@@ -10,6 +10,7 @@ namespace :get_movie_data do
   end
 end
 
+#URLs
 YOUTUBE_DAIRY_RECENT_MOVIES_URL = 'https://gdata.youtube.com/feeds/api/standardfeeds/JP/most_recent?time=today&v=2'
 FC2_RECENT_POPULAR_MOVIES_URL = "http://video.fc2.com/feed_popular.php?m=recent"
 #デイリーランキングがなく、そこを補完する機能でこのチャンネルにしなよってフォーラムに書いてあったと思う。 
@@ -27,7 +28,7 @@ def youtube()
     # category  = media.xpath("media:category").text
     title     = entry.search("title").text
     provider  = "youtube"
-    # Movie.create(title: title, url: url, thumbnail: thumbnail, videoid: videoid, provider: provider)
+    Movie.create(title: title, url: url, thumbnail: thumbnail, videoid: videoid, provider: provider)
   end
   puts "save yotube daily recent popular movies"
 end
@@ -42,7 +43,7 @@ def fc2()
     thumbnail = item.xpath("dc:image").text
     title = item.search("title").text 
     provider = "fc2"
-    # Movie.create(title: title, url: url, thumbnail: thumbnail, videoid: videoid, provider: provider)
+    Movie.create(title: title, url: url, thumbnail: thumbnail, videoid: videoid, provider: provider)
   end
   puts "save recent popular movies in video.fc2"
 end
@@ -57,7 +58,7 @@ def vimeo()
     thumbnail = item.xpath("media:content").xpath("media:thumbnail").attr("url").text
     videoid = url.split("/").last
     provider = "vimeo"
-    # Movie.create(title: title, url: url, thumbnail: thumbnail, videoid: videoid, provider: provider)
+    Movie.create(title: title, url: url, thumbnail: thumbnail, videoid: videoid, provider: provider)
   end
   puts "save vimeo movies of staffpick channel "
 end
@@ -74,7 +75,7 @@ def niconico()
     #category = nc_docs.search("tags").search("tag").children.first.text
     title = nc_docs.search("title").text
     provider = "niconico"
-    # Movie.create(title: title, url: url, thumbnail: thumbnail, videoid: videoid, provider: provider)
+    Movie.create(title: title, url: url, thumbnail: thumbnail, videoid: videoid, provider: provider)
   end
   puts "save movies of niconico douga daily ranking top 25"
 end
