@@ -3,10 +3,10 @@ require 'open-uri'
 namespace :get_movie_data do
   desc "各動画サイトから動画のデータをとってくる"
   task :fetch => :environment do
-    youtube()
-    fc2()
-    niconico()
-    vimeo()
+    youtube
+    fc2
+    niconico
+    vimeo
   end
 end
 
@@ -17,7 +17,7 @@ FC2_RECENT_POPULAR_MOVIES_URL = "http://video.fc2.com/feed_popular.php?m=recent"
 VIMEO_STAFFPICK_CHANNEL_URL = 'http://vimeo.com/channels/staffpicks/videos/rss'
 NICOVIDEO_DAIRY_RANLING_URL = 'http://www.nicovideo.jp/ranking/view/daily?rss=2.0'
 
-def youtube()
+def youtube
   youtube_uri = URI(YOUTUBE_DAIRY_RECENT_MOVIES_URL).read 
   youtube_entries = Nokogiri::XML(youtube_uri).search("entry") 
   youtube_entries.each do |entry|
@@ -34,7 +34,7 @@ def youtube()
 end
 
 
-def fc2()
+def fc2
   fc2_uri = URI(FC2_RECENT_POPULAR_MOVIES_URL).read
   fc2_items = Nokogiri::XML(fc2_uri).search("item")
   fc2_items.each do |item|
@@ -49,7 +49,7 @@ def fc2()
 end
 
 
-def vimeo()
+def vimeo
   vimeo_uri = URI(VIMEO_STAFFPICK_CHANNEL_URL).read
   vimeo_items = Nokogiri::XML(vimeo_uri).search("item")
   vimeo_items.each do |item|
@@ -63,7 +63,7 @@ def vimeo()
   puts "save vimeo movies of staffpick channel "
 end
 
-def niconico()
+def niconico
   niconico_uri = URI(NICOVIDEO_DAIRY_RANLING_URL).read
   niconico_items = Nokogiri::XML(niconico_uri).search("item")[0..24]
   niconico_items.each do |item|
