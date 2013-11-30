@@ -53,10 +53,11 @@ def vimeo
   vimeo_uri = URI(VIMEO_STAFFPICK_CHANNEL_URL).read
   vimeo_items = Nokogiri::XML(vimeo_uri).search("item")
   vimeo_items.each do |item|
-    url = item.search("link").text
+    channel_url = item.search("link").text
     title = item.search("title").text
     thumbnail = item.xpath("media:content").xpath("media:thumbnail").attr("url").text
-    videoid = url.split("/").last
+    videoid = channel_url.split("/").last
+    url = "http://vimeo.com/#{videoid}"
     provider = "vimeo"
     Movie.create(title: title, url: url, thumbnail: thumbnail, videoid: videoid, provider: provider)
   end
