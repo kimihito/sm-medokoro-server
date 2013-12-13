@@ -1,20 +1,16 @@
-<div class="container" id="" style="padding-top:60px;">
-	<ul class="row">
-		<li class="col-md-3">a</li>
-		<li class="col-md-3">b</li>
-		<li class="col-md-3">c</li>
-		<li class="col-md-3">d</li>
-	</ul>
-	<ul class="row">
-		<li class="col-md-3">a</li>
-		<li class="col-md-3">b</li>
-		<li class="col-md-3">c</li>
-		<li class="col-md-3">d</li>
-	</ul>
-	<ul class="row">
-		<li class="col-md-3">a</li>
-		<li class="col-md-3">b</li>
-		<li class="col-md-3">c</li>
-		<li class="col-md-3">d</li>
-	</ul>
-</div>    
+<div class="container" id="movies-container">
+	<% @movie_providers.each do |provider| %>
+		<div id="<%= provider %>">
+			<%= provider %>
+			<ul class="row movies">
+				<% eval("@#{provider}_movies").each do |movie| %>
+						<li class="col-md-3 movie">
+							<%= image_tag movie.thumbnail,{ style: "width:100%"} %>
+							<%= movie.title%>
+							<%= movie.videoid %>
+						</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+</div>

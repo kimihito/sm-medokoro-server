@@ -1,6 +1,14 @@
 class HomeController < ApplicationController
   def index
-    @movies = Movie.all
+    movies = Movie.all
+
+    # TODO: まとめて書けそう
+    @movie_providers = %w{youtube niconico vimeo fc2}
+    @youtube_movies = movies.where(provider: "youtube").order("created_at DESC")
+    @niconico_movies = movies.where(provider: "niconico").order("created_at DESC")
+    @vimeo_movies = movies.where(provider: "vimeo").order("created_at DESC")
+    @fc2_movies = movies.where(provider: "fc2").order("created_at DESC")
+
   end
 
   def all_movies
