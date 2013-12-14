@@ -1,5 +1,5 @@
 SmMedokoroServer::Application.routes.draw do
-  root "home#index"
+  root :to => "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -7,6 +7,11 @@ SmMedokoroServer::Application.routes.draw do
   # root 'welcome#index'
 
   get 'all_movies' => 'home#all_movies'
+
+  resources :movies, only: [:show]
+
+  get 'random' => 'movies#random'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

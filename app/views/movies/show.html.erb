@@ -1,0 +1,9 @@
+<div id="info">
+	<%=image_tag @movie.thumbnail %>
+	<span><%= @movie.title %></span>
+	<div><%=link_to "元リンク", @movie.url %> <small>from</small> <%= @movie.provider %></div>
+</div>
+
+<div id="player">
+	<iframe width="700" height="394" src="//www.youtube.com/embed/<%= @movie.videoid %>" frameborder="0" allowfullscreen></iframe>
+</div>
