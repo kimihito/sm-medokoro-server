@@ -2,10 +2,38 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#movies-container{
-	padding-top: 60px;
+@import "common";
+
+$movie-wrapper-min-height: 150px;
+$movie-wrapper-min-width: 200px;
+
+#movies-container {
+	@include container-padding-top;
 }
 
-.movie {
+.movie-list {
 	list-style-type: none;
 }
+
+.data {
+	min-height: $movie-wrapper-min-height;
+	min-width: $movie-wrapper-min-width;
+}
+
+.movie-img {
+	width: 100%;
+}
+
+.detail-box {
+	@include background-gray;
+}
+
+.title {
+	color: #333;
+	font-weight: bold;
+}
+
+.navbar-gray {
+	@include background-gray;
+}
+
