@@ -1,16 +1,13 @@
 SmMedokoroServer::Application.routes.draw do
   root :to => "home#index"
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
   get 'all_movies' => 'home#all_movies'
 
   resources :movies, only: [:show]
 
-  get 'random' => 'movies#random'
+  get 'random' => 'movies#random', as: :random
+
+  get ':year/:month/:day' => 'movies#date_order'
 
 
   # Example of regular route:

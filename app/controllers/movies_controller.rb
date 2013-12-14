@@ -14,4 +14,19 @@ class MoviesController < ApplicationController
       format.json {render json: @movie, action: :show}
     end
   end
+
+  def date_order
+    year = params[:year]
+    month = params[:month]
+    day = params[:day]
+    date = Time.new(year, month, day)
+    @start_date = date + 9.hour
+    @end_date = @start_date + 1.day
+    @movies = Movie.where("created_at >= ? and created_at < ?", @start_date, @end_date).order("created_at DESC");
+    respond_to do |format|
+      format.html
+      format.json {render json: @movies}
+    end
+
+  end
 end
