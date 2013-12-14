@@ -1,0 +1,5 @@
+<ul class="row movies">
+	<% @movies.each do |movie| %>
+		<%= render partial: "layouts/movie_list", locals: {movie: movie} %>
+	<% end %>
+</ul>

@@ -3,16 +3,7 @@
 		<h1><%= provider %></h1>
 		<ul class="row movies">
 			<% eval("@#{provider}_movies").each do |movie| %>
-				<li class="col-md-3 movie-list">
-					<div class="data">
-						<%= image_tag movie.thumbnail,{ class: "img-responsive movie-img"} %>
-						<div class="detail-box">
-							<div class="title">
-								<p><%= movie.title%></p>
-							</div>
-						</div>
-					</div>
-				</li>
+				<%= render partial: "layouts/movie_list", locals: {movie: movie} %>
 			<% end %>
 		</ul>
 		<p class="text-right">
