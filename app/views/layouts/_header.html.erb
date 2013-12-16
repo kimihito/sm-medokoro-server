@@ -13,12 +13,16 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" data-toggle="dropdown">
-            <span class="year" style="font-size:24px;">2013</span>年
-             <span class="month" style="font-size:24px;">12</span>月
-             <span class="day" style="font-size:24px;">14</span>日 <span class="caret"></span>
+            <span class="year" style="font-size:24px;"><%=date[:year]%></span>年
+             <span class="month" style="font-size:24px;"><%=date[:month]%></span>月
+             <span class="day" style="font-size:24px;"><%=date[:day]%></span>日 <span class="caret"></span>
           </a>
           <%# TODO: 日付のリストの表示%>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li class=""><%=link_to "aaa", date_path(2013, 11, 28) %></li>
+            <li class=""><a href="#ho">aaa</a></li>
+            <li class=""><a href="#ho">aaa</a></li>
+            <li class=""><a href="#ho">aaa</a></li>
             <li class=""><a href="#ho">aaa</a></li>
           </ul>
         </li>
