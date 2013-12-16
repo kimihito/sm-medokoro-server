@@ -12,19 +12,20 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#about" data-toggle="dropdown">
+          <a href="#" data-toggle="dropdown">
             <span class="year" style="font-size:24px;">2013</span>年
              <span class="month" style="font-size:24px;">12</span>月
              <span class="day" style="font-size:24px;">14</span>日 <span class="caret"></span>
           </a>
+          <%# TODO: 日付のリストの表示%>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><a href="#ho">aaa</a></li>
+            <li class=""><a href="#ho">aaa</a></li>
           </ul>
         </li>
-        <li><a href="#contact">Youtube</a></li>
-        <li><a href="#about">ニコニコ動画</a></li>
-        <li><a href="#contact">Vimeo</a></li>
-        <li><a href="#contact">FC2</a></li>
+        <li><%=link_to "Youtube", provider_path("youtube") %> </li>
+        <li><%=link_to "ニコニコ動画", provider_path("niconico") %> </li>
+        <li><%=link_to "Vimeo", provider_path("vimeo") %> </li>
+        <li><%=link_to "FC2", provider_path("fc2") %> </li>
       </ul>
       <ul class="nav navbar-nav pull-right">
         <li><%=link_to "ランダム再生", random_path %></li>
