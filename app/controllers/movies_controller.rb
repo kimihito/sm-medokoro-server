@@ -20,12 +20,11 @@ class MoviesController < ApplicationController
     month = params[:month].to_i
     day = params[:day].to_i
 
-    date = Date.valid_date?(year, month, day) ? Date.new(year, month, day) : Date.today 
     # 日付のチェック
-    @p_date = Date.valid_date?(year, month, day) ? Date.new(year, month, day) : Date.today 
-    @start_date = date + 9.hour
-    @end_date = @start_date + 1.day
-    @movies = Movie.where("created_at >= ? and created_at < ?", @start_date, @end_date).order("created_at DESC");
+    date = Date.valid_date?(year, month, day) ? Date.new(year, month, day) : Date.today
+    start_date = date + 9.hour
+    end_date = start_date + 1.day
+    @movies = Movie.where("created_at >= ? and created_at < ?", start_date, end_date).order("created_at DESC");
     respond_to do |format|
       format.html
       format.json {render json: @movies}
