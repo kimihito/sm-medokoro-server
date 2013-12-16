@@ -8,6 +8,9 @@ SmMedokoroServer::Application.routes.draw do
   get 'random' => 'movies#random', as: :random
 
   get ':year/:month/:day' => 'movies#date_order'
+  # TODO: 日付の正規表現が適切じゃない
+
+  get ':provider' => 'movies#provider_order', as: :provider
 
 
   # Example of regular route:
