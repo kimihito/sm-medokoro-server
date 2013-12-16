@@ -6,7 +6,7 @@
 
 <div id="player">
 	<% case @movie.provider %>
-	<% when "yotube" %>
+	<% when "youtube" %>
 		<iframe width="700" height="394" src="//www.youtube.com/embed/<%= @movie.videoid %>" frameborder="0" allowfullscreen></iframe>
 	<% when "niconico" %>
 		<script type="text/javascript" src="http://ext.nicovideo.jp/thumb_watch/<%=@movie.videoid%>?w=700&h=394"></script>
