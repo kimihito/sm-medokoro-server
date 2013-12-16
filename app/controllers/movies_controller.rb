@@ -16,10 +16,13 @@ class MoviesController < ApplicationController
   end
 
   def date_order
-    year = params[:year]
-    month = params[:month]
-    day = params[:day]
-    date = Time.new(year, month, day)
+    year = params[:year].to_i
+    month = params[:month].to_i
+    day = params[:day].to_i
+
+    date = Date.valid_date?(year, month, day) ? Date.new(year, month, day) : Date.today 
+    # 日付のチェック
+    @p_date = Date.valid_date?(year, month, day) ? Date.new(year, month, day) : Date.today 
     @start_date = date + 9.hour
     @end_date = @start_date + 1.day
     @movies = Movie.where("created_at >= ? and created_at < ?", @start_date, @end_date).order("created_at DESC");
@@ -27,6 +30,14 @@ class MoviesController < ApplicationController
       format.html
       format.json {render json: @movies}
     end
+  end
 
+  def provider_order
+    # TODO: 動画サイトごとのページを表示する
+    @movies = Movie.where(provider: params[:provider])
+    respond_to do |format|
+      format.html
+      format.json {render json: @movies }
+    end
   end
 end
