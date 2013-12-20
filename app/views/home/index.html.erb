@@ -1,10 +1,8 @@
-<% @movie_providers.each do |provider| %>
+<% @provider_movies.each do |provider, movies| %>
 	<div id="<%= provider %>">
 		<h1><%= provider %></h1>
-		<ul class="row movies">
-			<% eval("@#{provider}_movies").each do |movie| %>
-				<%= render partial: "layouts/movie_list", locals: {movie: movie} %>
-			<% end %>
+		<ul class="row" id="movies">
+			<%= render partial: "layouts/movie_list", collection: movies, as: :movie %>
 		</ul>
 		<p class="text-right">
 			<%= provider %>で本日人気の動画

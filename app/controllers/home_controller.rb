@@ -1,15 +1,16 @@
 class HomeController < ApplicationController
   def index
     # TODO: できればジャンルごとで分けたほうが見る側としてはいい
-    start_date = Date.today + 9.hour
-    end_date = start_date + 1.day
-    movies = Movie.where("created_at >= ? and created_at < ?", start_date, end_date).order("created_at DESC")
+    # TODO: アクセスした日でいいのか問題あります。
+    start_date = Date.today + 9.hours
+    end_date   = start_date + 1.day
+    movies     = Movie.where(created_at: start_date..end_date).order('created_at DESC')
 
     # TODO: まとめて書けそう
-    @movie_providers = %w{youtube niconico vimeo fc2}
-    @youtube_movies = movies.where(provider: "youtube").order("created_at DESC").take(4)
-    @niconico_movies = movies.where(provider: "niconico").order("created_at DESC").take(4)
-    @vimeo_movies = movies.where(provider: "vimeo").order("created_at DESC").take(4)
-    @fc2_movies = movies.where(provider: "fc2").order("created_at DESC").take(4)
+    @provider_movies = {}
+    providers = %w{youtube niconico vimeo fc2}
+    providers.each do |proivder|
+      @provider_movies[proivder] = movies.where(provider: proivder).limit(4)
+    end
   end
 end
