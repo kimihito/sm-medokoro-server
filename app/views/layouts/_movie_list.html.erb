@@ -1,4 +1,4 @@
-<li class="col-md-3 movie-list" style="margin-bottom: 10px;">
+<li class="col-md-3 movie-list mix mix_all <%=movie.provider%>">
 	<%=link_to(movie_path(movie.id)) do %>
 		<div class="data">
 			<%= image_tag movie.thumbnail,{ class: "img-responsive movie-img"} %>

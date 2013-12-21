@@ -1,11 +1,3 @@
-<% @provider_movies.each do |provider, movies| %>
-	<div id="<%= provider %>">
-		<h1><%= provider %></h1>
-		<ul class="row" id="movies">
-			<%= render partial: "layouts/movie_list", collection: movies, as: :movie %>
-		</ul>
-		<p class="text-right">
-			<%= provider %>で本日人気の動画
-		</p>
-	</div>
-<% end %>
+<ul class="row" id="movies">
+	<%= render partial: "layouts/movie_list", collection: @movies, as: :movie %>
+</ul>
