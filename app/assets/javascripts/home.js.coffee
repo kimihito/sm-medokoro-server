@@ -6,4 +6,5 @@ $ ->
 	$(".title p").ellipsis({
 		row: 2
 	});
-	$(".movie-list").tile();
+
+	$(".data").tile();
