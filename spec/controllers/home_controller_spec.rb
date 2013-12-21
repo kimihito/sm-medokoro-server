@@ -4,10 +4,13 @@ describe HomeController do
 
   describe "GET 'index'" do
     it "returns http success" do
-      pending
-      # get 'index'
-      # response.should be_success
+      get 'index'
+      expect(response).to be_success
+    end
+
+    it 'render the index template' do
+      get 'index'
+      expect(response).to render_template('index')
     end
   end
-
 end
