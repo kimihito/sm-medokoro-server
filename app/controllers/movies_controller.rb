@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  before_action :validate_date, only: :date_order
+
   def show
     @movie = Movie.find(params[:id])
     respond_to do |format|
@@ -37,6 +39,19 @@ class MoviesController < ApplicationController
     respond_to do |format|
       format.html
       format.json {render json: @movies }
+    end
+  end
+
+  private
+  def validate_date
+    #日付として存在しないとき
+    begin
+      params_date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+      if params_date > Date.today
+        render 'public/4044.html', status: 404
+      end
+    rescue
+      render 'public/404.html', status: 404
     end
   end
 end
