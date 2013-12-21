@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-fixed-top navbar-gray" role="navigation">
+<div class="navbar navbar-default navbar-fixed-top navbar-gray" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -7,25 +7,35 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<%=root_path%>">みどころサイト別人気動画</a>
+      <a class="navbar-brand" href="<%=root_path%>">サイト別人気動画</a>
     </div>
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a href="#" data-toggle="dropdown">
+          <span class="year" style="font-size:24px;"><%=search_date.year%></span>年
+          <span class="month" style="font-size:24px;"><%=search_date.month%></span>月
+          <span class="day" style="font-size:24px;"><%=search_date.day%></span>日 <span class="caret"></span>
+        </a>
+      <%# TODO: 日付のリストの表示%>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <li class=""><%=link_to "aaa", date_path(2013, 11, 28) %></li>
+          <li class=""><a href="#ho">aaa</a></li>
+          <li class=""><a href="#ho">aaa</a></li>
+          <li class=""><a href="#ho">aaa</a></li>
+          <li class=""><a href="#ho">aaa</a></li>
+          <li class=""><a href="#ho">aaa</a></li>
+          <li class=""><a href="#ho">aaa</a></li>
+          <li class=""><a href="#ho">aaa</a></li>
+          <li class=""><a href="#ho">aaa</a></li>
+          <li class=""><a href="#ho">aaa</a></li>
+          <li class=""><a href="#ho">aaa</a></li>
+          <li class=""><a href="#ho">aaa</a></li>
+          <li class=""><a href="#ho">aaa</a></li>
+        </ul>
+      </li>
+    </ul>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" data-toggle="dropdown">
-            <span class="year" style="font-size:24px;"><%=date[:year]%></span>年
-             <span class="month" style="font-size:24px;"><%=date[:month]%></span>月
-             <span class="day" style="font-size:24px;"><%=date[:day]%></span>日 <span class="caret"></span>
-          </a>
-          <%# TODO: 日付のリストの表示%>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li class=""><%=link_to "aaa", date_path(2013, 11, 28) %></li>
-            <li class=""><a href="#ho">aaa</a></li>
-            <li class=""><a href="#ho">aaa</a></li>
-            <li class=""><a href="#ho">aaa</a></li>
-            <li class=""><a href="#ho">aaa</a></li>
-          </ul>
-        </li>
         <li><%=link_to "Youtube", provider_path("youtube") %> </li>
         <li><%=link_to "ニコニコ動画", provider_path("niconico") %> </li>
         <li><%=link_to "Vimeo", provider_path("vimeo") %> </li>
