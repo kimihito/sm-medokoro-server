@@ -24,9 +24,9 @@ class MoviesController < ApplicationController
 
     # 日付のチェック
     date = Date.valid_date?(year, month, day) ? Date.new(year, month, day) : Date.today
-    start_date = date + 9.hour
+    start_date = date.yesterday + 9.hour
     end_date = start_date + 1.day
-    @movies = Movie.where("created_at >= ? and created_at < ?", start_date, end_date).order("created_at DESC")
+    @movies = Movie.where(created_at: start_date..end_date).order("created_at DESC")
     respond_to do |format|
       format.html
       format.json {render json: @movies}
