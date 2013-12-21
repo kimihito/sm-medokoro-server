@@ -3,8 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+	$(".data").tile();
+	$("#movies").mixitup();
 	$(".title p").ellipsis({
 		row: 2
 	});
-
-	$(".data").tile();

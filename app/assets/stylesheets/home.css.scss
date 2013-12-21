@@ -11,8 +11,18 @@ $movie-wrapper-min-width: 200px;
 	@include container-padding-top;
 }
 
+
+#movies {
+	.mix{
+	    opacity: 0;
+	    display: none;
+	}
+}
+
 .movie-list {
 	list-style-type: none;
+	height: 215px;
+	margin-bottom: 10px;
 }
 
 .data {
@@ -32,6 +42,7 @@ $movie-wrapper-min-width: 200px;
 .title {
 	color: #333;
 	font-weight: bold;
+	word-wrap: break-word;
 }
 
 .navbar-gray {
