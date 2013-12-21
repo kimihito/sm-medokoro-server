@@ -19,3 +19,13 @@
 	<% end %>
 </div>
 <%# TODO: 動画がウィンドウのサイズごとに小さくならない %>
+
+<script type="text/javascript">
+
+	$(function() {
+		$(window).load(function(){
+			$("#player div").css({"max-width":"100%", "height":"auto !important"})
+		});
+	});
+
+</script>
