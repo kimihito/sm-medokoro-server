@@ -4,8 +4,4 @@
 	<%= params[:day] %>の動画サイトで人気の動画
 <% end %>
 
-<ul class="row movies">
-	<% @movies.each do |movie| %>
-		<%= render partial: "layouts/movie_list", locals: {movie: movie} %>
-	<% end %>
-</ul>
+<%= render partial: "layouts/movie_list", locals: {movies: @movies} %>

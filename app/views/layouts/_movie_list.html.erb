@@ -1,14 +1,17 @@
-<li class="col-md-3 movie-list" style="margin-bottom: 10px;">
-	<%=link_to(movie_path(movie.id)) do %>
-		<div class="data">
-			<%= image_tag movie.thumbnail,{ class: "img-responsive movie-img"} %>
-			<div class="detail-box">
-				<div class="title">
-					<p><%= movie.title%></p>
+<ul class="row" id="movies">
+	<% movies.each do |movie| %>
+		<li class="col-md-3 movie-list mix mix_all <%= movie.provider %>">
+			<%=link_to(movie_path(movie.id)) do %>
+				<div class="data">
+					<%= image_tag movie.thumbnail,{ class: "img-responsive movie-img"} %>
+					<div class="detail-box">
+						<div class="title">
+							<p><%= movie.title%></p>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+			<% end %>
+		</li>
 	<% end %>
-</li>
-<%# TODO: サムネイルの高さをそろえるjQueryの何かをいれる %>
+</ul>
 <%# TODO: linkにホバーしたときの下線は消す %>

@@ -9,14 +9,6 @@ SmMedokoroServer::Application.routes.draw do
 
   get ':year/:month/:day' => 'movies#date_order', as: :date
 
-  # TODO: これっているのかな？どっちかというとサイトとかはどうでもいいんじゃないか
-  get ':provider' => 'movies#provider_order', as: :provider
-
-  # TODO: youtube/2013/11/28 っていう感じのURLでその日の分野ごとにする
-  # get ':provider/:year/:month/:day' => 'movies#provider_order', as: :provider
-
-
-
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -51,7 +43,7 @@ SmMedokoroServer::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
