@@ -20,7 +20,11 @@
         <ul class="dropdown-menu date-list" role="menu" aria-labelledby="dLabel">
           <% (Movie.first.created_at.to_date..Date.today).reverse_each do |date| %>
             <li class="date <%= 'active' if date == search_date %>">
-              <%=link_to date.strftime('%Y/%m/%d'), date_path(date.year, date.month, date.day) %>
+              <%=link_to date_path(date.year, date.month, date.day) do %>
+              <span class="year" style="font-size:24px;"><%= date.year %></span>年
+          <span class="month" style="font-size:24px;"><%= date.month %></span>月
+          <span class="day" style="font-size:24px;"><%= date.day %></span>日
+              <% end %>
             </li>
           <% end %>
        </ul>
@@ -30,6 +34,9 @@
       <ul class="nav navbar-nav">
         <li>
           <%=link_to "ALL", "#all", class: "filter", data: {filter: 'all'} %>
+        </li>
+        <li>
+          <%=link_to "おまかせ", random_path %>
         </li>
         <li>
           <%=link_to "Youtube", "#youtube", class: "filter", data: {filter: 'youtube'} %>
@@ -43,9 +50,6 @@
         <li>
           <%=link_to "FC2", "#fc2", class: "filter", data: {filter: "fc2"} %>
         </li>
-      </ul>
-      <ul class="nav navbar-nav pull-right">
-        <li><%=link_to "ランダム再生", random_path %></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
