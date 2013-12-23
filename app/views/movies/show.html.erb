@@ -9,11 +9,11 @@
 	<% when "youtube" %>
 		<iframe width="700" height="394" src="//www.youtube.com/embed/<%= @movie.videoid %>" frameborder="0" allowfullscreen></iframe>
 	<% when "niconico" %>
-		<script type="text/javascript" src="http://ext.nicovideo.jp/thumb_watch/<%=@movie.videoid%>?w=700&h=394"></script>
+		<script type="text/javascript" src="http://ext.nicovideo.jp/thumb_watch/<%= @movie.videoid %>?w=700&h=394"></script>
 	<% when "vimeo" %>
-		<iframe src="//player.vimeo.com/video/<%=@movie.videoid%>" width="700" height="394" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+		<iframe src="//player.vimeo.com/video/<%= @movie.videoid %>" width="700" height="394" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 	<% when "fc2" %>
-		<script src="http://static.fc2.com/video/js/outerplayer.min.js" url="http://video.fc2.com/ja/content/<%=@movie.videoid%>/" tk="" tl="<%=@movie.title%>" sj="31000" d="" w="700" h="394" charset="UTF-8"></script>
+		<script src="http://static.fc2.com/video/js/outerplayer.min.js" url="http://video.fc2.com/ja/content/<%=@movie.videoid%>/" tk="" tl="<%= @movie.title %>" sj="31000" d="" w="700" h="394" charset="UTF-8"></script>
 	<% else %>
 		Sorry, This video is not supported.
 	<% end %>
