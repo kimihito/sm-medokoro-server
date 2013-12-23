@@ -3,14 +3,21 @@ require 'spec_helper'
 describe HomeController do
 
   describe "GET 'index'" do
-    it "returns http success" do
-      get 'index'
-      expect(response).to be_success
+    context "Movieモデルが１つもない場合" do
+      it "リクエストが成功する" do
+        get 'index'
+        expect(response).to be_success
+        expect(response.status).to eq(200)
+      end
+
+      it 'errors/emptyが表示される' do
+        get 'index'
+        expect(response).to render_template('errors/empty')
+      end
     end
 
-    it 'render the index template' do
-      get 'index'
-      expect(response).to render_template('index')
+    context "Movieモデルが存在する場合" do
+      pending
     end
   end
 end
