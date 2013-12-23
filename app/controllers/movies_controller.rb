@@ -25,9 +25,10 @@ class MoviesController < ApplicationController
     respond_to do |format|
       if @movies.empty?
         format.html {render template: 'errors/empty'}
+      else
+        format.html
+        format.json {render json: @movies}
       end
-      format.html
-      format.json {render json: @movies}
     end
   end
 
