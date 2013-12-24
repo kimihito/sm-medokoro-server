@@ -1,7 +1,7 @@
 <div id="info">
 	<%=image_tag @movie.thumbnail %>
 	<span><%= @movie.title %></span>
-	<div><%=link_to "元リンク", @movie.url %> <small>from</small> <%= @movie.provider %></div>
+	<div><%=link_to "#{@movie.provider.capitalize}で見る", @movie.url %> </div>
 </div>
 
 <div id="player">
