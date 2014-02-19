@@ -27,8 +27,8 @@ class MoviesController < ApplicationController
         format.html {render template: 'errors/empty'}
       else
         format.html
-        format.json {render json: @movies}
       end
+      format.json {render json: @movies}
     end
   end
 
