@@ -7,6 +7,6 @@ deploy:
     secure: WGd5UY94D/o8CJVeQO489HIabd8XSUkZhz+tCcKV/hDqdD1WVRIDYK2HPQtlHpXqp7hzBsYl/4bowxXh91eJeZVECYW5PDKWhIvMYhUa+yqxK97FVG6sjDm85BNjLivzBjh/KIDtfz9iWv22cSJWBcmouXk97nOK0XNuHQRSWeA=
   app:
     master: sm-medokoro-server
-    staging: sm-medokoro-server-staging
+    development: sm-medokoro-server-staging
   on:
     repo: kimihito/sm-medokoro-server
