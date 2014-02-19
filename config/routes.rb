@@ -1,7 +1,7 @@
 SmMedokoroServer::Application.routes.draw do
   root :to => "home#index"
 
-  get 'all_movies' => 'home#all_movies'
+  get 'today' => 'home#today_movies'
 
   resources :movies, only: [:show]
 
